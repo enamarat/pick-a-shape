@@ -30,7 +30,7 @@
 }
 
 /* typography */
-h1, h2, button {
+h1, h2, p, button {
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -50,6 +50,18 @@ h2 {
 .shapeName {
     font-weight: bold;
     color: tomato;
+}
+
+#language {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+}
+
+#language:hover {
+    cursor: pointer;
+    color: blue;
 }
 
 /* buttons */

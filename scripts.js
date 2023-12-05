@@ -62,10 +62,13 @@ const shapes = [
 const gallery = document.querySelector('.gallery');
 const instruction = document.querySelector('#instruction');
 const restartButton = document.querySelector('#restartButton');
+const languageButton = document.querySelector('#language');;
 let record = {};
 let recordRemovedShapes = {};
 let count = 0;
 let currentShapePosition = null;
+let language = JSON.parse(localStorage.getItem('language-pick-a-category'));
+if (language == null) language = 'english';
 
 
 const generateGrid = () => {
@@ -86,6 +89,7 @@ const generateGrid = () => {
     
     currentShapePosition  = Math.floor(Math.random() * shapes.length);
     instruction.innerHTML = `Find and click on <span class='shapeName'>${shapes[currentShapePosition]['englishName']}</span>`;
+    loadLanguage();
 }
 
 const removeShape = (event) => {
@@ -113,11 +117,35 @@ const restartGame = () => {
     record = {};
     recordRemovedShapes = {};
     currentShapePosition = null;
-    
+
     generateGrid();
     restartButton.style.display = 'none';
+}
+
+const toggleL = () => {
+    if (language == 'english') {
+        language = 'russian';
+        languageButton.textContent = 'ENG';
+        instruction.innerHTML = `Найди и кликни на <span class='shapeName'>${shapes[currentShapePosition]['russianName']}</span>`;
+    } else {
+        language = 'english';
+        languageButton.textContent = 'RUS';
+        instruction.innerHTML = `Find and click on <span class='shapeName'>${shapes[currentShapePosition]['englishName']}</span>`;
+    }
+    localStorage.setItem(`language-pick-a-category`, JSON.stringify(language));
+}
+
+const loadLanguage = () => {
+    if (language == 'english') {
+        languageButton.textContent = 'RUS';
+        instruction.innerHTML = `Find and click on <span class='shapeName'>${shapes[currentShapePosition]['englishName']}</span>`;
+    } else {
+        languageButton.textContent = 'ENG';
+        instruction.innerHTML = `Найди и кликни на <span class='shapeName'>${shapes[currentShapePosition]['russianName']}</span>`;
+    }
 }
 
 window.addEventListener('DOMContentLoaded', generateGrid);
 gallery.addEventListener('click', removeShape);
 restartButton.addEventListener('click', restartGame);
+languageButton.addEventListener('click', toggleL);
