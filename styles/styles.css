@@ -30,7 +30,7 @@
 }
 
 /* typography */
-h1, h2 {
+h1, h2, button {
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -50,4 +50,19 @@ h2 {
 .shapeName {
     font-weight: bold;
     color: tomato;
+}
+
+/* buttons */
+#restartButton {
+    display: none;
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+}
+
+#restartButton:hover {
+    cursor: pointer;
+    background-color: darkblue;
+    color: yellow;
 }

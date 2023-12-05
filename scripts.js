@@ -61,13 +61,14 @@ const shapes = [
 ];
 const gallery = document.querySelector('.gallery');
 const instruction = document.querySelector('#instruction');
-const record = {};
-const recordRemovedShapes = {};
+const restartButton = document.querySelector('#restartButton');
+let record = {};
+let recordRemovedShapes = {};
 let count = 0;
 let currentShapePosition = null;
 
 
-const pickRandomShape = () => {
+const generateGrid = () => {
     while (count < shapes.length) {
         let pos = Math.floor(Math.random() * shapes.length);
 
@@ -95,18 +96,28 @@ const removeShape = (event) => {
         
         if (count == 0) {
             instruction.innerHTML = `<span class='shapeName'>Good work!</span>`;
-            return 0;
-        }
+            restartButton.style.display = 'block';
+        } else {
+            // Pick a new shape
+            currentShapePosition  = Math.floor(Math.random() * shapes.length);
 
-        // Pick a new shape
-        currentShapePosition  = Math.floor(Math.random() * shapes.length);
-
-        while (recordRemovedShapes.hasOwnProperty(shapes[currentShapePosition]['imgSrc']) == true) {
-            currentShapePosition = Math.floor(Math.random() * shapes.length);
+            while (recordRemovedShapes.hasOwnProperty(shapes[currentShapePosition]['imgSrc']) == true) {
+                currentShapePosition = Math.floor(Math.random() * shapes.length);
+            }
+            instruction.innerHTML = `Find and click on <span class='shapeName'>${shapes[currentShapePosition]['englishName']}</span>`;
         }
-        instruction.innerHTML = `Find and click on <span class='shapeName'>${shapes[currentShapePosition]['englishName']}</span>`;
     }
 }
 
-window.addEventListener('DOMContentLoaded', pickRandomShape);
+const restartGame = () => {
+    record = {};
+    recordRemovedShapes = {};
+    currentShapePosition = null;
+    
+    generateGrid();
+    restartButton.style.display = 'none';
+}
+
+window.addEventListener('DOMContentLoaded', generateGrid);
 gallery.addEventListener('click', removeShape);
+restartButton.addEventListener('click', restartGame);
