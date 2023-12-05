@@ -99,7 +99,12 @@ const removeShape = (event) => {
         count--;
         
         if (count == 0) {
-            instruction.innerHTML = `<span class='shapeName'>Good work!</span>`;
+            if (language == 'english') {
+                instruction.innerHTML = `<span class='shapeName'>Good work!</span>`;
+            } else {
+                instruction.innerHTML = `<span class='shapeName'>Хорошая работа!</span>`;
+            }
+            
             restartButton.style.display = 'block';
         } else {
             // Pick a new shape
@@ -108,7 +113,13 @@ const removeShape = (event) => {
             while (recordRemovedShapes.hasOwnProperty(shapes[currentShapePosition]['imgSrc']) == true) {
                 currentShapePosition = Math.floor(Math.random() * shapes.length);
             }
-            instruction.innerHTML = `Find and click on <span class='shapeName'>${shapes[currentShapePosition]['englishName']}</span>`;
+
+            if (language == 'english') {
+                instruction.innerHTML = `Find and click on <span class='shapeName'>${shapes[currentShapePosition]['englishName']}</span>`;
+            } else {
+                instruction.innerHTML = `Найди и кликни на <span class='shapeName'>${shapes[currentShapePosition]['russianName']}</span>`;
+            }
+            
         }
     }
 }
