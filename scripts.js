@@ -81,7 +81,7 @@ const generateGrid = () => {
         record[pos] = true;
        
        gallery.innerHTML += `<div class='shapeDiv'>
-            <img class='shapeImage' id=${shapes[pos]['imgSrc']} src=./images/${shapes[pos]['imgSrc']}.png />
+            <img class='shapeImage' id=${shapes[pos]['imgSrc']} src=https://raw.githubusercontent.com/enamarat/pick-a-shape/main/images/${shapes[pos]['imgSrc']}.png />
         </div>`;
 
         count++;
